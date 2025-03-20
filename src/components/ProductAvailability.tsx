@@ -8,7 +8,7 @@ interface DateLog {
   endDate: Date;
 }
 
-const API_BASE_URL = 'http://localhost:8000/calender_api';
+const API_BASE_URL = 'https://fantastic-bassoon-gkbt.onrender.com/calender_api';
 const PRODUCT_ID = '1'; // TODO: Replace with actual product ID from your app's context
 
 // Helper function to generate all dates within a range
