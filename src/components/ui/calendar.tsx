@@ -16,8 +16,8 @@ function Calendar({
     months: "relative flex flex-col sm:flex-row gap-4",
     month: "w-full",
     month_caption: "relative mx-10 mb-1 flex h-9 items-center justify-center z-20",
-    caption_label: "text-sm font-medium",
-    nav: "absolute top-0 flex w-full justify-between z-10",
+    caption_label: "text-sm font-medium ",
+    nav: "absolute top-0 flex w-full justify-between z-10 border-b-2",
     button_previous: cn(
       "h-9 w-9 text-muted-foreground/80 hover:text-foreground p-0",
     ),
@@ -27,7 +27,7 @@ function Calendar({
     weekday: "h-9 w-9 p-0 text-xs font-medium text-muted-foreground/80",
     day_button:
       "relative flex h-9 w-9 items-center justify-center whitespace-nowrap rounded-full p-0 text-foreground outline-offset-2 group-[[data-selected]:not(.range-middle)]:[transition-property:color,background-color,border-radius,box-shadow] group-[[data-selected]:not(.range-middle)]:duration-150 focus:outline-none group-data-[disabled]:pointer-events-none focus-visible:z-10 hover:bg-red-500 group-data-[selected]:bg-red-500 hover:text-foreground group-data-[selected]:text-primary-foreground group-data-[disabled]:text-foreground/30 group-data-[disabled]:line-through group-data-[outside]:text-foreground/30 group-data-[outside]:group-data-[selected]:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 group-[.range-start:not(.range-end)]:rounded-full group-[.range-end:not(.range-start)]:rounded-full group-[.range-middle]:rounded-full group-data-[selected]:group-[.range-middle]:bg-red-100 group-data-[selected]:group-[.range-middle]:text-foreground",
-    day: "group h-9 w-9 px-0 text-sm",
+    day: "group h-9 w-9 p-1 text-sm",
     range_start: "range-start",
     range_end: "range-end",
     range_middle: "range-middle",
@@ -54,9 +54,9 @@ function Calendar({
   const defaultComponents = {
     Chevron: (props: any) => {
       if (props.orientation === "left") {
-        return <ChevronLeft size={16} strokeWidth={2} {...props} aria-hidden="true" />;
+        return <ChevronLeft className="w-6 h-6 text-gray-400" size={18} strokeWidth={2} {...props} aria-hidden="true" />;
       }
-      return <ChevronRight size={16} strokeWidth={2} {...props} aria-hidden="true" />;
+      return <ChevronRight className="w-6 h-6 text-gray-400" size={18} strokeWidth={2} {...props} aria-hidden="true" />;
     },
   };
 

@@ -11,6 +11,10 @@ export function ProductAvailability() {
   const [reason, setReason] = useState('');
 
   const { dates, isLoading, error, fetchUnavailableDates, saveUnavailableDates } = useAvailabilityStore();
+  // Progress bar segments
+  const segments = Array(3).fill(null);
+  const activeSegment = 2; 
+  
 
   useEffect(() => {
     fetchUnavailableDates();
@@ -39,6 +43,7 @@ export function ProductAvailability() {
   };
 
   const dateRanges = groupDatesIntoRanges(dates);
+  const totalDays = dateRanges.reduce((sum, log) => sum + getDaysCount(log.startDate, log.endDate), 0);
 
   if (!isEditing) {
     return (
@@ -55,7 +60,19 @@ export function ProductAvailability() {
   return (
     <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Product Availability</h2>
-
+      {/* Progress Bar */}
+      <div className="mb-12 justify-items-center">
+          <div className="flex gap-3 w-1/2">
+            {segments.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1 flex-1 rounded-full ${
+                  index <= activeSegment - 1 ? 'bg-indigo-600' : 'bg-gray-200'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-500 rounded-lg">
           {error}
@@ -82,30 +99,37 @@ export function ProductAvailability() {
       </div>
 
       <div className="mt-6">
+        {dateRanges.length > 0 && (
+          <p className="text-sm text-gray-700 font-medium mb-4">
+            The product will be unavailable for {totalDays} days in total
+          </p>
+        )}
+  
         {dateRanges.map((log, index) => (
           <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg mb-2">
             <div className="flex-1">
-              <p className="font-medium">{formatDateRange(log.startDate, log.endDate)}</p>
-              <p className="text-sm text-gray-600">
-                The product will be unavailable for {getDaysCount(log.startDate, log.endDate)} days
-              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-gray-600 mx-2">
+                ⦿ {formatDateRange(log.startDate, log.endDate)}
+                </span>
+                <button
+                  onClick={() => removeDateRange(index)}
+                  className="ml-2 text-gray-500 hover:text-gray-700"
+                  disabled={isLoading}
+                >
+                  <X className="w-4 h-4 text-gray-400" />
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => removeDateRange(index)}
-              className="ml-2 text-gray-500 hover:text-gray-700"
-              disabled={isLoading}
-            >
-             <X className="w-4 h-4 text-gray-400" />
-            </button>
           </div>
         ))}
-      </div>
+        </div>
 
       <div className="mt-6 flex justify-end gap-4">
         <button onClick={() => setIsEditing(false)} className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors" disabled={isLoading}>
           Cancel
         </button>
-        <button onClick={handleSaveAvailability} disabled={!dateRange?.from || !dateRange?.to || isLoading} className="px-4 py-2  text-white rounded-lg bg-purple-600 hover:bg-purple-500/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+        <button onClick={handleSaveAvailability} disabled={!dateRange?.from || !dateRange?.to || isLoading} className="px-4 py-2  text-white rounded-lg bg-purple-800 hover:bg-purple-500/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
           {isLoading ? 'Saving...' : 'Save'}
         </button>
       </div>
