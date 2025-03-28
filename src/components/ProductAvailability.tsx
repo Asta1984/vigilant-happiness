@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,  } from 'react';
 import { Calendar } from '../components/ui/calendar';
 import { DateRange } from 'react-day-picker';
 import useAvailabilityStore from '../store/useAvailabilityStore';
@@ -94,6 +94,7 @@ export function ProductAvailability() {
               className="ml-2 text-gray-500 hover:text-gray-700"
               disabled={isLoading}
             >
+             x 
             </button>
           </div>
         ))}
