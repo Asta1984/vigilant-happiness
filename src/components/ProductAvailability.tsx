@@ -125,7 +125,7 @@ export function ProductAvailability() {
           Cancel
         </Button>
         <Button onClick={handleSaveAvailability} disabled={!dateRange?.from || !dateRange?.to || isLoading} className="px-4 py-2 w-full text-white rounded-lg bg-[#635ae7] hover:bg-[#635ae7]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-          {isLoading ? 'Booking...' : 'Next'}
+          Next
           <ChevronRight className="w-6 h-5 text-gray-100 "  strokeWidth={2}  />
         </Button>
       </div>
