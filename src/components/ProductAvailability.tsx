@@ -89,6 +89,20 @@ export function ProductAvailability() {
           onSelect={setDateRange}
           className="rounded-md border"
           numberOfMonths={1}
+          formatters={{
+            formatWeekdayName: (date) => {
+              const dayNames = [
+                'SUN',
+                'MON',
+                'TUE',
+                'WED',
+                'THUS',
+                'FRI',
+                'SAT',
+              ];
+              return dayNames[date.getDay()];
+            },
+          }}
           disabled={dateRanges.map(log => ({ from: log.startDate, to: log.endDate }))}
         />
       </div>
