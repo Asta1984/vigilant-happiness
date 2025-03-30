@@ -73,6 +73,7 @@ function Calendar({
       classNames={mergedClassNames}
       components={mergedComponents}
       weekStartsOn={1}
+      
       {...props}
     />
   );

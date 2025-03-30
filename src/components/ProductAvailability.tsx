@@ -24,11 +24,12 @@ export function ProductAvailability() {
 
   const handleSaveAvailability = async () => {
     if (!dateRange?.from || !dateRange?.to) return;
-
+  
     const newDates = getDatesInRange(dateRange.from, dateRange.to);
-    const allDates = [...new Set([...dates, ...newDates].map(date => date.toISOString().split('T')[0]))]
-      .map(dateStr => new Date(dateStr));
-
+    const allDates = [...new Set([...dates, ...newDates].map(date => 
+      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+    ))].map(dateStr => new Date(dateStr));
+  
     await saveUnavailableDates(allDates, reason);
     setDateRange(undefined);
     setReason('');
