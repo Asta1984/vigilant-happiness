@@ -4,6 +4,8 @@ import { Calendar } from '../components/ui/calendar';
 import { DateRange } from 'react-day-picker';
 import useAvailabilityStore from '../store/useAvailabilityStore';
 import { getDatesInRange, groupDatesIntoRanges, formatDateRange, getDaysCount } from '../utils/dateUtils';
+import { Button } from './ui/button';
+import { ChevronRight } from 'lucide-react';
 
 export function ProductAvailability() {
   const [isEditing, setIsEditing] = useState(false);
@@ -61,7 +63,7 @@ export function ProductAvailability() {
     <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Product Availability</h2>
       {/* Progress Bar */}
-      <div className="mb-12 justify-items-center">
+      <div className="mb-8 justify-items-center">
           <div className="flex gap-3 w-1/2">
             {segments.map((_, index) => (
               <div
@@ -74,18 +76,10 @@ export function ProductAvailability() {
           </div>
         </div>
       {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-500 rounded-lg">
+        <div className="mb-3 p-3 bg-red-100 text-red-500 rounded-lg">
           {error}
         </div>
       )}
-
-      <input
-        type="text"
-        placeholder="Reason (optional)"
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
-        className="mb-4 p-2 border rounded w-full"
-      />
 
       <div className="flex items-center justify-center p-4">
         <Calendar
@@ -106,7 +100,7 @@ export function ProductAvailability() {
         )}
   
         {dateRanges.map((log, index) => (
-          <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg mb-2">
+          <div key={index} className="flex items-center justify-between p-3 rounded-lg ">
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-600 mx-2">
@@ -125,13 +119,14 @@ export function ProductAvailability() {
         ))}
         </div>
 
-      <div className="mt-6 flex justify-end gap-4">
-        <button onClick={() => setIsEditing(false)} className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors" disabled={isLoading}>
+      <div className="mt-6 flex justify-around gap-4">
+        <Button variant={'outline'} onClick={() => setIsEditing(false)} className="px-4 py-2 w-full text-gray-600 hover:text-gray-800 font-bold transition-colors" disabled={isLoading}>
           Cancel
-        </button>
-        <button onClick={handleSaveAvailability} disabled={!dateRange?.from || !dateRange?.to || isLoading} className="px-4 py-2  text-white rounded-lg bg-purple-800 hover:bg-purple-500/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-          {isLoading ? 'Saving...' : 'Save'}
-        </button>
+        </Button>
+        <Button onClick={handleSaveAvailability} disabled={!dateRange?.from || !dateRange?.to || isLoading} className="px-4 py-2 w-full text-white rounded-lg bg-[#635ae7] hover:bg-[#635ae7]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          {isLoading ? 'Booking...' : 'Next'}
+          <ChevronRight className="w-6 h-5 text-gray-100 "  strokeWidth={2}  />
+        </Button>
       </div>
     </div>
   );
