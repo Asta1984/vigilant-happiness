@@ -98,7 +98,7 @@ export function ProductAvailability() {
             />
           </div>
 
-      <div>
+      <div className='w-md'>
         {dateRanges.length > 0 && (
           <p className="text-sm text-gray-700 font-medium text-nowrap">
             The product will be unavailable for {totalDays} days.
