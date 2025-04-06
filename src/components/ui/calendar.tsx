@@ -32,7 +32,7 @@ function Calendar({
     range_end: "range-end",
     range_middle: "range-middle",
     today:
-      "*:after:pointer-events-none *:after:absolute *:after:bottom-1 *:after:start-1/2 *:after:z-10 *:after:h-[3px] *:after:w-[3px] *:after:-translate-x-1/2 *:after:rounded-full *:after:bg-primary [&[data-selected]:not(.range-middle)>*]:after:bg-background [&[data-disabled]>*]:after:bg-foreground/30 *:after:transition-colors h-9 w-9 rounded-lg bg-accent",
+      "*:after:pointer-events-none *:after:absolute *:after:bottom-1 *:after:start-1/2 *:after:z-10 *:after:h-[3px] *:after:w-[3px] *:after:-translate-x-1/2 *:after:rounded-full *:after:bg-primary [&[data-selected]:not(.range-middle)>*]:after:bg-background [&[data-disabled]>*]:after:bg-foreground/30 *:after:transition-colors h-9 w-9 rounded-full",
     outside: "text-muted-foreground data-selected:bg-accent/50 data-selected:text-muted-foreground",
     hidden: "invisible",
     week_number: "h-9 w-9 p-0 text-xs font-medium text-muted-foreground/80",
@@ -54,9 +54,29 @@ function Calendar({
   const defaultComponents = {
     Chevron: (props: any) => {
       if (props.orientation === "left") {
-        return <ChevronLeft className="w-6 h-6 text-gray-400" size={18} strokeWidth={2} {...props} aria-hidden="true" />;
+        return (
+          <div className="flex justify-center items-center">
+            <ChevronLeft 
+              className="w-6 h-6 text-gray-400" 
+              size={18} 
+              strokeWidth={2} 
+              {...props} 
+              aria-hidden="true" 
+            />
+          </div>
+        );
       }
-      return <ChevronRight className="w-6 h-6 text-gray-400" size={18} strokeWidth={2} {...props} aria-hidden="true" />;
+      return (
+        <div className="flex justify-center items-center">
+          <ChevronRight 
+            className="w-6 h-6 text-gray-400" 
+            size={18} 
+            strokeWidth={2} 
+            {...props} 
+            aria-hidden="true" 
+          />
+        </div>
+      );
     },
   };
 
