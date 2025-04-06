@@ -14,7 +14,7 @@ export function ProductAvailability() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [reason, setReason] = useState('');
 
-  const { dates, isLoading, error, fetchUnavailableDates, saveUnavailableDates } = useAvailabilityStore();
+  const { dates, isLoading, fetchUnavailableDates, saveUnavailableDates } = useAvailabilityStore();
   // Progress bar segments
   const segments = Array(3).fill(null);
   const activeSegment = 2; 
@@ -65,10 +65,10 @@ export function ProductAvailability() {
   return (
 
       <>
-          <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Product Availability</h2>
+          <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg pl-6 pr-6">
+      <h2 className="text-l font-semibold mb-4">Product Unvailability</h2>
       {/* Progress Bar */}
-      <div className="mb-8 justify-items-center">
+      <div className="mb-2 justify-items-center">
           <div className="flex gap-3 w-1/2">
             {segments.map((_, index) => (
               <div
@@ -80,46 +80,33 @@ export function ProductAvailability() {
             ))}
           </div>
         </div>
-      {error && (
-        <div className="mb-3 p-3 bg-red-100 text-red-500 rounded-lg">
-          {error}
-        </div>
-      )}
 
-      <div className="flex items-center justify-center p-4">
-        <Calendar
-          mode="range"
-          selected={dateRange}
-          onSelect={setDateRange}
-          className="rounded-md border"
-          numberOfMonths={1}
-          formatters={{
-            formatWeekdayName: (date) => {
-              const dayNames = [
-                'SUN',
-                'MON',
-                'TUE',
-                'WED',
-                'THUS',
-                'FRI',
-                'SAT',
-              ];
-              return dayNames[date.getDay()];
-            },
-          }}
-          disabled={dateRanges.map(log => ({ from: log.startDate, to: log.endDate }))}
-        />
-      </div>
+          <div className="flex items-center justify-center">
+            <Calendar
+              mode="range"
+              selected={dateRange}
+              onSelect={setDateRange}
+              className="rounded-md border scale-90 origin-top"
+              numberOfMonths={1}
+              formatters={{
+                formatWeekdayName: (date) => {
+                  const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                  return dayNames[date.getDay()];
+                },
+              }}
+              disabled={dateRanges.map(log => ({ from: log.startDate, to: log.endDate }))}
+            />
+          </div>
 
-      <div className="mt-6">
+      <div>
         {dateRanges.length > 0 && (
-          <p className="text-sm text-gray-700 font-medium mb-4">
-            The product will be unavailable for {totalDays} days in total
+          <p className="text-sm text-gray-700 font-medium text-nowrap">
+            The product will be unavailable for {totalDays} days.
           </p>
         )}
   
         {dateRanges.map((log, index) => (
-          <div key={index} className="flex items-center justify-between p-3 rounded-lg ">
+          <div key={index} className="flex items-center justify-between p-1 rounded-lg ">
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-600 mx-2">
@@ -138,7 +125,7 @@ export function ProductAvailability() {
         ))}
         </div>
 
-      <div className="mt-6 flex justify-around gap-4 mb-9">
+      <div className="mt-2 flex justify-around gap-4 mb-14">
         <Button variant={'outline'} onClick={() => setIsEditing(false)} className="px-4 py-2 border-2 border-primary w-full text-gray-600 hover:text-gray-800 font-bold transition-colors" disabled={isLoading}>
           Add date log
         </Button>
