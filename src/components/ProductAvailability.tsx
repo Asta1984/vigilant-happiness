@@ -68,7 +68,7 @@ export function ProductAvailability() {
           <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg pl-6 pr-6">
       <h2 className="text-l font-semibold mb-4">Product Unvailability</h2>
       {/* Progress Bar */}
-      <div className="mb-2 justify-items-center">
+      <div className="mb-4 justify-items-center">
           <div className="flex gap-3 w-1/2">
             {segments.map((_, index) => (
               <div
@@ -106,7 +106,7 @@ export function ProductAvailability() {
         )}
   
         {dateRanges.map((log, index) => (
-          <div key={index} className="flex items-center justify-between p-1 rounded-lg ">
+          <div key={index} className="flex items-center justify-between p-2 rounded-lg ">
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-600 mx-2">
@@ -125,7 +125,7 @@ export function ProductAvailability() {
         ))}
         </div>
 
-      <div className="mt-2 flex justify-around gap-4 mb-14">
+      <div className="mt-2 flex justify-around gap-4 mb-4">
         <Button variant={'outline'} onClick={() => setIsEditing(false)} className="px-4 py-2 border-2 border-primary w-full text-gray-600 hover:text-gray-800 font-bold transition-colors" disabled={isLoading}>
           Add date log
         </Button>
