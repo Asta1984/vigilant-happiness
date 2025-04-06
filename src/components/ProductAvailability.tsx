@@ -65,7 +65,7 @@ export function ProductAvailability() {
   return (
 
       <>
-      <div className="w-full mx-auto bg-white  pl-6 pr-6">
+      <div className=" mx-auto bg-white">
       <h2 className="text-l font-semibold mb-4">Product Unvailability</h2>
       {/* Progress Bar */}
       <div className="mb-4 justify-items-center">
