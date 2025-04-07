@@ -110,6 +110,7 @@ export function ProductAvailability() {
 
   return (
     <>
+      <div className=" mx-auto bg-white">
       <MoveLeftIcon className="w-6 h-6" />
         <h2 className="text-l font-semibold mb-4">Product Unavailability</h2>
         {/* Progress Bar */}
@@ -141,15 +142,16 @@ export function ProductAvailability() {
             }}
             disabled={[
               ...existingDateRanges.map(log => ({ from: log.startDate, to: log.endDate })),
+              // Don't disable local date ranges that are pending save
             ]}
           />
         </div>
 
         <div className='max-w-md'>
           {(!dates || (existingDateRanges.length === 0 && localDateRanges.length === 0)) ? (
-            <p className="flex items-start text-gray-700 font-bold text-nowrap">Choose dates when product will be unavailable</p>
+            <p className=" text-gray-700 font-bold text-nowrap">Choose dates when product will be unavailable</p>
           ) : (
-          <p className="flex items-start text-gray-700 font-bold text-nowrap">
+          <p className=" text-gray-700 font-bold text-nowrap">
             The product will be unavailable for {totalDays} days.
             </p>
           )}
@@ -195,7 +197,7 @@ export function ProductAvailability() {
           ))}
         </div>
 
-        <div className="mt-2 flex justify-around gap-4">
+        <div className="mt-2 flex justify-around gap-4 w-md">
           <Button 
             variant={'outline'} 
             onClick={handleAddDateLog} 
@@ -223,6 +225,7 @@ export function ProductAvailability() {
             <NavigationItem icon={User} label="Profile" />
           </div>
         </div>
+      </div>
     </>
   );
 }
