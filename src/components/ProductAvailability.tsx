@@ -16,8 +16,8 @@ export function ProductAvailability() {
 
   const { dates, isLoading, fetchUnavailableDates, saveUnavailableDates } = useAvailabilityStore();
   // Progress bar segments
-  const segments = Array(3).fill(null);
-  const activeSegment = 2; 
+  const segments = Array(4).fill(null);
+  const activeSegment = 3; 
   
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function ProductAvailability() {
               numberOfMonths={1}
               formatters={{
                 formatWeekdayName: (date) => {
-                  const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                   return dayNames[date.getDay()];
                 },
               }}
@@ -125,7 +125,7 @@ export function ProductAvailability() {
         ))}
         </div>
 
-      <div className="mt-2 flex justify-around gap-4 mb-4">
+      <div className="mt-2 flex justify-around gap-4">
         <Button variant={'outline'} onClick={() => setIsEditing(false)} className="px-4 py-2 border-2 border-primary w-full text-gray-600 hover:text-gray-800 font-bold transition-colors" disabled={isLoading}>
           Add date log
         </Button>
@@ -134,6 +134,7 @@ export function ProductAvailability() {
           <ChevronRight className="w-6 h-5 text-gray-100 "  strokeWidth={2}  />
         </Button>
       </div>
+
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
         <div className="flex items-center justify-between max-w-md mx-auto">
           <NavigationItem icon={Home} label="Home" />
@@ -143,6 +144,7 @@ export function ProductAvailability() {
           <NavigationItem icon={User} label="Profile" />
         </div>
       </div>
+
       </div>
       </>
   );
