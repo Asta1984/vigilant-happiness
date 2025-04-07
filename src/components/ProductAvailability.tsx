@@ -149,9 +149,9 @@ export function ProductAvailability() {
 
         <div className='max-w-md'>
           {(!dates || (existingDateRanges.length === 0 && localDateRanges.length === 0)) ? (
-            <p className="text-sm text-gray-700 font-medium text-nowrap">Choose dates when product will be unavailable</p>
+            <p className="text-sm text-gray-700 font-bold text-nowrap">Choose dates when product will be unavailable</p>
           ) : (
-          <p className="text-sm text-gray-700 font-medium text-nowrap">
+          <p className="text-sm text-gray-700 font-bold text-nowrap">
             The product will be unavailable for {totalDays} days.
             </p>
           )}
