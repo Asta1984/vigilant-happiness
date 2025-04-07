@@ -23,6 +23,8 @@ export function ProductAvailability() {
     fetchUnavailableDates();
   }, [fetchUnavailableDates]);
 
+  
+
   const handleAddDateLog = () => {
     if (!dateRange?.from || !dateRange?.to) return;
     
@@ -81,7 +83,7 @@ export function ProductAvailability() {
     setLocalDateRanges(prev => prev.filter((_, i) => i !== index));
   };
 
-  const existingDateRanges = groupDatesIntoRanges(dates);
+  const existingDateRanges = dates ? groupDatesIntoRanges(dates) : [];
   
   // Calculate total days from both existing dates and new local ranges
   const existingTotalDays = existingDateRanges.reduce(
@@ -146,11 +148,14 @@ export function ProductAvailability() {
         </div>
 
         <div className='max-w-md'>
-          {(existingDateRanges.length > 0 || localDateRanges.length > 0) && (
-            <p className="text-sm text-gray-700 font-medium text-nowrap">
-              The product will be unavailable for {totalDays} days.
+          {(!dates || (existingDateRanges.length === 0 && localDateRanges.length === 0)) ? (
+            <p className="text-sm text-gray-700 font-medium text-nowrap">Choose dates when product will be unavailable</p>
+          ) : (
+          <p className="text-sm text-gray-700 font-medium text-nowrap">
+            The product will be unavailable for {totalDays} days.
             </p>
           )}
+
 
           {/* Display existing date ranges */}
           {existingDateRanges.map((log, index) => (
