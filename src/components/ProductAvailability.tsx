@@ -5,14 +5,13 @@ import { DateRange } from 'react-day-picker';
 import useAvailabilityStore from '../store/useAvailabilityStore';
 import { getDatesInRange, groupDatesIntoRanges, formatDateRange, getDaysCount } from '../utils/dateUtils';
 import { Button } from './ui/button';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, MoveLeftIcon } from 'lucide-react';
 import { Home, Heart, PlusCircle, MessageCircle, User } from 'lucide-react';
 import NavigationItem from '../components/NavigationDock';
 
 export function ProductAvailability() {
   const [isEditing, setIsEditing] = useState(false);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
-  const [reason, setReason] = useState('');
   const [localDateRanges, setLocalDateRanges] = useState<DateRange[]>([]);
 
   const { dates, isLoading, fetchUnavailableDates, saveUnavailableDates } = useAvailabilityStore();
@@ -61,12 +60,11 @@ export function ProductAvailability() {
     const datesToSave = Array.from(allDatesToSave).map(dateStr => new Date(dateStr));
     
     // Save to backend
-    await saveUnavailableDates(datesToSave, reason);
+    await saveUnavailableDates(datesToSave);
     
     // Reset state
     setLocalDateRanges([]);
     setDateRange(undefined);
-    setReason('');
     setIsEditing(false);
   };
 
@@ -111,6 +109,7 @@ export function ProductAvailability() {
   return (
     <>
       <div className=" mx-auto bg-white">
+      <MoveLeftIcon className="w-6 h-6" />
         <h2 className="text-l font-semibold mb-4">Product Unavailability</h2>
         {/* Progress Bar */}
         <div className="mb-8 justify-items-center">

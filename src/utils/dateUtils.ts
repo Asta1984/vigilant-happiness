@@ -37,10 +37,21 @@ export interface DateLog {
     return ranges;
   };
   
-  // Format date range for display
-  export const formatDateRange = (startDate: Date, endDate: Date) => {
-    return `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+
+// Format date range for display
+export const formatDateRange = (startDate: Date, endDate: Date) => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  const formatDate = (date: Date) => {
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
   };
+  
+  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+};
+  
   
   // Get the number of days in a date range
   export const getDaysCount = (startDate: Date, endDate: Date) => {
