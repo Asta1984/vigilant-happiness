@@ -6,10 +6,8 @@ export default function App() {
 
   return (
     <>
-    <div className='container'>
-    <div className="flex items-center justify-center  ">
+    <div className="w-md sm:overflow-y-hidden sm:overflow-x-hidden">
       <ProductAvailability />
-    </div>
     </div>
     </>
   )
