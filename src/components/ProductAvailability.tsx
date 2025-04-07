@@ -197,7 +197,7 @@ export function ProductAvailability() {
           ))}
         </div>
 
-        <div className="mt-2 flex justify-around gap-4 w-md">
+        <div className="mt-2 flex justify-around gap-4 w-full">
           <Button 
             variant={'outline'} 
             onClick={handleAddDateLog} 
